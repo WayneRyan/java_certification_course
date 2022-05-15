@@ -14,6 +14,7 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html");
         PrintWriter pw = response.getWriter();
         pw.println("hello world");
         // Check username and passowrd
