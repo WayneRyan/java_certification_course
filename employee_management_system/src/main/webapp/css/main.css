@@ -1,0 +1,46 @@
+table, td, form, div {
+    border: 1px solid black;
+    padding: 2px 8px;
+    margin: 10px;
+    border-collapse: collapse;
+}
+
+table, form, input[type=text], input[type=password] {
+    width: -webkit-fill-available;
+    max-width: 350px;
+}
+
+input[type=reset] {
+    float: right;
+}
+
+th {
+    border: 2px solid black;
+}
+
+div {
+    width: max-content;
+    float: left;
+    min-height: 300px;
+}
+
+.fa-solid {
+    margin: 5px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    clear: both;
+    margin: 0px;
+    padding: 20px 8px 5px 8px;
+}
+
+input, select {
+    margin: 5px;
+}
+
+.center {
+    margin: auto;
+    width: fit-content;
+    float: unset;
+    border: none;
+}

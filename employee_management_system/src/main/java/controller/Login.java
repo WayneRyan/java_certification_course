@@ -1,5 +1,7 @@
 package controller;
 
+import service.Validation;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -16,17 +18,14 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter pw = response.getWriter();
-        pw.println("hello world");
-        pw.println("junk");
         HttpSession session = request.getSession(true);
-        session.setAttribute("name", "Welcome");
-        session.invalidate();
-        if (session.isNew()) {
-            System.out.println(session.getAttribute("name"));
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+        if (Validation.checkCredentials(userName, password)){
+
         } else {
-            System.out.println(session.isNew());
+
         }
-        pw.println("junk2");
         // Check username and passowrd
         // if not match return to login with error
         // set session data
