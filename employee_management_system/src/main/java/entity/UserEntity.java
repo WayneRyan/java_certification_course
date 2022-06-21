@@ -23,6 +23,10 @@ public class UserEntity {
     @Column(name = "isAdmin")
     private Boolean isAdmin;
 
+    @ManyToOne
+    @JoinColumn(name = "department")
+    private DepartmentEntity department;
+
     public int getId() {
         return id;
     }
@@ -55,12 +59,21 @@ public class UserEntity {
         isAdmin = admin;
     }
 
+    public DepartmentEntity getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(DepartmentEntity department) {
+        this.department = department;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", department=" + department + '\'' +
                 ", isAdmin=" + isAdmin +
                 '}';
     }

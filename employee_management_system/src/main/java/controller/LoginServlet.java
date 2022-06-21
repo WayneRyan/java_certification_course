@@ -22,10 +22,13 @@ public class LoginServlet extends HttpServlet {
             if (user == null) {
                 pw.println("Invalid username and password");
                 request.getRequestDispatcher("index.jsp").include(request, response);
-            } else if (user.getAdmin()) {
-                request.getRequestDispatcher("admin.jsp").forward(request, response);
             } else {
-                request.getRequestDispatcher("user.jsp").forward(request, response);
+                request.getSession().setAttribute("user", user);
+                if (user.getAdmin()) {
+                    request.getRequestDispatcher("admin.jsp").forward(request, response);
+                } else {
+                    request.getRequestDispatcher("user.jsp").forward(request, response);
+                }
             }
         } catch (Exception e) {
             request.getRequestDispatcher("index.jsp").include(request, response);
