@@ -1,6 +1,8 @@
 package controller;
 
 import entity.UserEntity;
+import repository.DepartmentDao;
+import repository.RegulationDao;
 import service.Authentication;
 
 import javax.servlet.ServletException;
@@ -25,8 +27,11 @@ public class LoginServlet extends HttpServlet {
             } else {
                 request.getSession().setAttribute("user", user);
                 if (user.getAdmin()) {
+                    request.setAttribute("allDepartments", DepartmentDao.getAllDepartments());
+                    request.setAttribute("allRegulations", RegulationDao.getAllRegulations());
                     request.getRequestDispatcher("admin.jsp").forward(request, response);
                 } else {
+                    request.setAttribute("userRegulations", RegulationDao.getUsersRegulations(user));
                     request.getRequestDispatcher("user.jsp").forward(request, response);
                 }
             }
