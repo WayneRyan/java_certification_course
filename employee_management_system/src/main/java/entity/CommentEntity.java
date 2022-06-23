@@ -2,11 +2,10 @@ package entity;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
-@Table(name = "Regulation", schema = "employeemanagementsystem")
-public class RegulationEntity {
+@Table(name = "Comment", schema = "employeemanagementsystem")
+public class CommentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -17,11 +16,12 @@ public class RegulationEntity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "department")
-    private DepartmentEntity department;
+    @JoinColumn(name = "regulation")
+    private RegulationEntity regulation;
 
-    @OneToMany(mappedBy = "regulation")
-    private Set<CommentEntity> comments;
+    @ManyToOne
+    @JoinColumn(name = "user")
+    private UserEntity user;
 
     public int getId() {
         return id;
@@ -39,28 +39,29 @@ public class RegulationEntity {
         this.description = description;
     }
 
-    public DepartmentEntity getDepartment() {
-        return department;
+    public RegulationEntity getRegulation() {
+        return regulation;
     }
 
-    public void setDepartment(DepartmentEntity department) {
-        this.department = department;
+    public void setRegulation(RegulationEntity regulation) {
+        this.regulation = regulation;
     }
 
-    public Set<CommentEntity> getComments() {
-        return comments;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setComments(Set<CommentEntity> comments) {
-        this.comments = comments;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     @Override
     public String toString() {
-        return "RegulationEntity{" +
+        return "CommentEntity{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", department=" + department +
+                ", regulation=" + regulation +
+                ", user=" + user +
                 '}';
     }
 
@@ -68,7 +69,7 @@ public class RegulationEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RegulationEntity that = (RegulationEntity) o;
+        CommentEntity that = (CommentEntity) o;
         return id == that.id;
     }
 

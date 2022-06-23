@@ -1,4 +1,4 @@
 package repository;
 
-public class UserDAO {
+public class UserDao {
 }

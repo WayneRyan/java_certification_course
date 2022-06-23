@@ -35,4 +35,6 @@ public class RegulationServlet extends HttpServlet {
             request.getRequestDispatcher("index.jsp").include(request, response);
         }
     }
+
+    
 }

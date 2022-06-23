@@ -19,7 +19,6 @@
     <tr>
         <th>ID</th>
         <th>Description</th>
-        <th>Department</th>
     </tr>
     </thead>
     <tbody>
@@ -27,10 +26,22 @@
         <tr>
             <td>${regulation.id}</td>
             <td>${regulation.description}</td>
-            <td>${regulation.department.name}</td>
         </tr>
     </core:forEach>
     </tbody>
 </table>
+<h3>Make Comment</h3>
+<form action="CommentServlet" method="post">
+    <label>Description:</label>
+    <textarea name="description" cols="44" rows="10"></textarea>
+    <label>Regulation:</label>
+    <select name="regulation">
+        <core:forEach items="${requestScope.userRegulations}" var="regulation">
+            <option value="${regulation.id}">${regulation.id}</option>
+        </core:forEach>
+    </select><br>
+    <input type="submit" name="submit" value="submit">
+    <input type="reset" name="reset" value="reset">
+</form>
 </body>
 </html>

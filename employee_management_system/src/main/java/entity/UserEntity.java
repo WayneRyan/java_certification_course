@@ -2,6 +2,7 @@ package entity;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "User", schema = "employeemanagementsystem")
@@ -26,6 +27,9 @@ public class UserEntity {
     @ManyToOne
     @JoinColumn(name = "department")
     private DepartmentEntity department;
+
+    @OneToMany(mappedBy = "user")
+    private Set<CommentEntity> comments;
 
     public int getId() {
         return id;
@@ -65,6 +69,14 @@ public class UserEntity {
 
     public void setDepartment(DepartmentEntity department) {
         this.department = department;
+    }
+
+    public Set<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<CommentEntity> comments) {
+        this.comments = comments;
     }
 
     @Override

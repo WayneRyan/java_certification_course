@@ -1,5 +1,6 @@
 package repository;
 
+import entity.DepartmentEntity;
 import entity.RegulationEntity;
 import entity.UserEntity;
 import resources.DbResource;
@@ -42,6 +43,17 @@ public class RegulationDao {
             return tq.getResultList();
         } catch (Exception e) {
             System.out.println(e);
+            return null;
+        }
+    }
+
+    public static RegulationEntity getRegulation(int id) {
+        try {
+            EntityManager em = DbResource.getEntityManager();
+            TypedQuery<RegulationEntity> tq = em.createQuery("select regulation from RegulationEntity regulation where regulation.id = :regID", RegulationEntity.class);
+            tq.setParameter("regID", id);
+            return tq.getSingleResult();
+        } catch (Exception e) {
             return null;
         }
     }
