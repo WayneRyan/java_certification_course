@@ -28,7 +28,7 @@
     <tbody>
     <core:forEach items="${requestScope.allRegulations}" var="regulation">
         <tr>
-            <td>${regulation.id}</td>
+            <td><a href="RegulationServlet?regulation=${regulation.id}">${regulation.id}</a></td>
             <td>${regulation.description}</td>
             <td>${regulation.department.name}</td>
         </tr>

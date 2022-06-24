@@ -13,6 +13,20 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "RegulationServlet", value = "/RegulationServlet")
 public class RegulationServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter pw = response.getWriter();
+        try {
+            UserEntity user = (UserEntity) request.getSession().getAttribute("user");
+            if (user == null) {throw new Exception();}
+            RegulationEntity regulation = RegulationDao.getRegulation(Integer.parseInt(request.getParameter("regulation")));
+            request.setAttribute("regulation", regulation);
+            request.getRequestDispatcher("regulationDetails.jsp").forward(request, response);
+        }catch (Exception e){
+            request.getRequestDispatcher("index.jsp").include(request, response);
+        }
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
