@@ -1,4 +1,5 @@
-<%--
+<%@ page import="entity.RegulationEntity" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: wryan
   Date: 5/15/2022
@@ -13,6 +14,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            <%
+             List<RegulationEntity> userRegulations = (List<RegulationEntity>) request.getAttribute("userRegulations");
+             if(userRegulations.size() > 0) { %>
+            $('#description').val('<%= userRegulations.get(0).getDescription()%>');
+            <% } %>
             $("#regulationSelect").change(function () {
                 $.ajax({
                     url: "CommentServlet",
