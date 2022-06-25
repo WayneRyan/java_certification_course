@@ -10,6 +10,18 @@
 <head>
     <title>User Regulation Management</title>
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#regulationSelect").change(function(){
+                console.log("execute query");
+                //     $.ajax({url: "demo_test.txt", success: function(result){
+                //             $("#div1").html(result);
+                //         }});
+            });
+        });
+    </script>
+
 </head>
 <body class="center">
 <h1>User Regulation Management</h1>
@@ -35,7 +47,7 @@
     <label>Description:</label>
     <textarea name="description" cols="44" rows="10"></textarea>
     <label>Regulation:</label>
-    <select name="regulation">
+    <select name="regulation" id="regulationSelect">
         <core:forEach items="${requestScope.userRegulations}" var="regulation">
             <option value="${regulation.id}">${regulation.id}</option>
         </core:forEach>

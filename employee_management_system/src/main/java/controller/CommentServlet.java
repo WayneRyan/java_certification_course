@@ -1,5 +1,6 @@
 package controller;
 
+import com.google.gson.Gson;
 import entity.CommentEntity;
 import entity.RegulationEntity;
 import entity.UserEntity;
@@ -15,19 +16,34 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "CommentServlet", value = "/CommentServlet")
 public class CommentServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter pw = response.getWriter();
+        try {
+
+            // get the comments for this employee
+            // convert them to json String comments = new Gson.toJson(comments);
+            pw.print(new Gson().toJson(comments));
+            pw.flush();
+        }catch (Exception e){
+            System.out.println("Threw exception in CommentServlet");
+            pw.print(new Gson().toJson("error"));
+            pw.flush();
+        }
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter pw = response.getWriter();
         try {
-            System.out.println("getting user from session");
             UserEntity user = (UserEntity) request.getSession().getAttribute("user");
-            System.out.println("got user from session");
             if (user == null || user.getAdmin()) {
-                System.out.println("user is null or admin");
                 throw  new Exception();
             }
-            System.out.println("Hello World");
             String description = request.getParameter("description");
             int regulationID = Integer.parseInt(request.getParameter("regulation"));
             CommentEntity comment = new CommentEntity();
