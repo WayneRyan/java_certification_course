@@ -19,7 +19,7 @@ public class DepartmentDao {
         }
     }
 
-    public static  DepartmentEntity getDepartment(int id) {
+    public static DepartmentEntity getDepartment(int id) {
         try {
             EntityManager em = DbResource.getEntityManager();
             TypedQuery<DepartmentEntity> tq = em.createQuery("select department from DepartmentEntity department where department.id = :deptID", DepartmentEntity.class);

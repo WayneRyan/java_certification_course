@@ -19,12 +19,15 @@
 <body class="center">
 <h1><a href="LoginServlet"><i class="fa-solid fa-house"></i></a>Regulation Details</h1>
 <ul>
-    <li>ID: <%= regulation.getId()%></li>
-    <li>Description: <%= regulation.getDescription()%></li>
+    <li>ID: <%= regulation.getId()%>
+    </li>
+    <li>Description: <%= regulation.getDescription()%>
+    </li>
     <li>Department Name: <%= regulation.getDepartment().getName()%><br>Department Members:
         <ul>
             <% for (UserEntity user : regulation.getDepartment().getUsers()) { %>
-            <li><%= user.getUserName()%></li>
+            <li><%= user.getUserName()%>
+            </li>
             <% } %>
         </ul>
     </li>
@@ -35,10 +38,12 @@
         <th>Description:</th>
         <th>User:</th>
     </tr>
-    <% for (CommentEntity comment: regulation.getComments()){ %>
+    <% for (CommentEntity comment : regulation.getComments()) { %>
     <tr>
-        <td><%= comment.getDescription() %></td>
-        <td><%= comment.getUser().getUserName() %></td>
+        <td><%= comment.getDescription() %>
+        </td>
+        <td><%= comment.getUser().getUserName() %>
+        </td>
     </tr>
     <% } %>
 </table>

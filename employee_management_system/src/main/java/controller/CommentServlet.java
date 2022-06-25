@@ -23,14 +23,16 @@ public class CommentServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter pw = response.getWriter();
         try {
-
-            // get the comments for this employee
-            // convert them to json String comments = new Gson.toJson(comments);
-            pw.print(new Gson().toJson(comments));
+            UserEntity user = (UserEntity) request.getSession().getAttribute("user");
+            if (user == null || user.getAdmin()) {
+                throw  new Exception();
+            }
+            int regulationID = Integer.parseInt(request.getParameter("regulationID"));
+            CommentEntity comment = CommentDao.getComment(regulationID, user);
+            pw.print(new Gson().toJson(comment));
             pw.flush();
         }catch (Exception e){
-            System.out.println("Threw exception in CommentServlet");
-            pw.print(new Gson().toJson("error"));
+            pw.print(new Gson().toJson(null));
             pw.flush();
         }
     }

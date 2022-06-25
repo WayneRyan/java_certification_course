@@ -1,12 +1,13 @@
 package entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "Department", schema = "employeemanagementsystem")
-public class DepartmentEntity {
+public class DepartmentEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -17,10 +18,10 @@ public class DepartmentEntity {
     private String name;
 
     @OneToMany(mappedBy = "department")
-    private Set<UserEntity> users;
+    private transient Set<UserEntity> users;
 
     @OneToMany(mappedBy = "department")
-    private Set<RegulationEntity> regulations;
+    private transient Set<RegulationEntity> regulations;
 
     public int getId() {
         return id;

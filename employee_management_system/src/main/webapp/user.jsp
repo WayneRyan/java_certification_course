@@ -5,23 +5,32 @@
   Time: 9:44 AM
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="core"  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>User Regulation Management</title>
     <link rel="stylesheet" href="css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            $("#regulationSelect").change(function(){
-                console.log("execute query");
-                //     $.ajax({url: "demo_test.txt", success: function(result){
-                //             $("#div1").html(result);
-                //         }});
+        $(document).ready(function () {
+            $("#regulationSelect").change(function () {
+                $.ajax({
+                    url: "CommentServlet",
+                    data: {
+                        'regulationID': $('#regulationSelect :selected').text()
+                    },
+                    success: function (result) {
+                        if (result === 'null') {
+                            console.log('nothing to show');
+                            $('#description').val('');
+                        } else {
+                            $('#description').val(result.description);
+                        }
+                    }
+                });
             });
         });
     </script>
-
 </head>
 <body class="center">
 <h1>User Regulation Management</h1>
@@ -45,7 +54,7 @@
 <h3>Make Comment</h3>
 <form action="CommentServlet" method="post">
     <label>Description:</label>
-    <textarea name="description" cols="44" rows="10"></textarea>
+    <textarea id="description" name="description" cols="44" rows="10"></textarea>
     <label>Regulation:</label>
     <select name="regulation" id="regulationSelect">
         <core:forEach items="${requestScope.userRegulations}" var="regulation">

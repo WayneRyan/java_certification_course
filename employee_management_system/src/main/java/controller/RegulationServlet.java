@@ -5,9 +5,11 @@ import entity.UserEntity;
 import repository.DepartmentDao;
 import repository.RegulationDao;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -19,11 +21,13 @@ public class RegulationServlet extends HttpServlet {
         PrintWriter pw = response.getWriter();
         try {
             UserEntity user = (UserEntity) request.getSession().getAttribute("user");
-            if (user == null) {throw new Exception();}
+            if (user == null) {
+                throw new Exception();
+            }
             RegulationEntity regulation = RegulationDao.getRegulation(Integer.parseInt(request.getParameter("regulation")));
             request.setAttribute("regulation", regulation);
             request.getRequestDispatcher("regulationDetails.jsp").forward(request, response);
-        }catch (Exception e){
+        } catch (Exception e) {
             request.getRequestDispatcher("index.jsp").include(request, response);
         }
     }
@@ -34,7 +38,7 @@ public class RegulationServlet extends HttpServlet {
         PrintWriter pw = response.getWriter();
         try {
             if (!((UserEntity) request.getSession().getAttribute("user")).getAdmin()) {
-                throw  new Exception();
+                throw new Exception();
             }
             String description = request.getParameter("description");
             int departmentID = Integer.parseInt(request.getParameter("department"));
@@ -45,10 +49,10 @@ public class RegulationServlet extends HttpServlet {
             request.setAttribute("allDepartments", DepartmentDao.getAllDepartments());
             request.setAttribute("allRegulations", RegulationDao.getAllRegulations());
             request.getRequestDispatcher("admin.jsp").forward(request, response);
-        }catch (Exception e){
+        } catch (Exception e) {
             request.getRequestDispatcher("index.jsp").include(request, response);
         }
     }
 
-    
+
 }

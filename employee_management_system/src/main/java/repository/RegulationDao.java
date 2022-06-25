@@ -1,6 +1,5 @@
 package repository;
 
-import entity.DepartmentEntity;
 import entity.RegulationEntity;
 import entity.UserEntity;
 import resources.DbResource;
@@ -13,7 +12,7 @@ import java.util.List;
 public class RegulationDao {
 
     public static boolean persistRegulation(RegulationEntity regulation) {
-        try{
+        try {
             EntityManager em = DbResource.getEntityManager();
             EntityTransaction et = em.getTransaction();
             et.begin();
