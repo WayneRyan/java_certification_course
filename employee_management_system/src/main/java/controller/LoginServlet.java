@@ -58,8 +58,8 @@ public class LoginServlet extends HttpServlet {
             List<RegulationEntity> userRegulations = RegulationDao.getUsersRegulations(user);
             String initialComment = "";
             if (userRegulations.size() > 0) {
-                CommentEntity theComment =  CommentDao.getComment(userRegulations.get(0).getId(), user);
-                if (theComment != null){
+                CommentEntity theComment = CommentDao.getComment(userRegulations.get(0).getId(), user);
+                if (theComment != null) {
                     initialComment = theComment.getDescription();
                 }
             }

@@ -31,7 +31,7 @@ public class CommentServlet extends HttpServlet {
             }
             int regulationID = Integer.parseInt(request.getParameter("regulationID"));
             CommentEntity comment = CommentDao.getComment(regulationID, user);
-            pw.print(new Gson().toJson(comment == null ? "" :  comment.getDescription()));
+            pw.print(new Gson().toJson(comment == null ? "" : comment.getDescription()));
             pw.flush();
         } catch (Exception e) {
             pw.print(new Gson().toJson(""));
@@ -61,8 +61,8 @@ public class CommentServlet extends HttpServlet {
             List<RegulationEntity> userRegulations = RegulationDao.getUsersRegulations(user);
             String initialComment = "";
             if (userRegulations.size() > 0) {
-                CommentEntity theComment =  CommentDao.getComment(userRegulations.get(0).getId(), user);
-                if (theComment != null){
+                CommentEntity theComment = CommentDao.getComment(userRegulations.get(0).getId(), user);
+                if (theComment != null) {
                     initialComment = theComment.getDescription();
                 }
             }
