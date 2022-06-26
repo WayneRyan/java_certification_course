@@ -11,14 +11,11 @@
 <head>
     <title>User Regulation Management</title>
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://kit.fontawesome.com/4164eda486.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            <%
-             List<RegulationEntity> userRegulations = (List<RegulationEntity>) request.getAttribute("userRegulations");
-             if(userRegulations.size() > 0) { %>
-            $('#description').val('<%= userRegulations.get(0).getDescription()%>');
-            <% } %>
+            $('#description').val('<%= request.getAttribute("initialComment")%>');
             $("#regulationSelect").change(function () {
                 $.ajax({
                     url: "CommentServlet",
@@ -26,12 +23,11 @@
                         'regulationID': $('#regulationSelect :selected').text()
                     },
                     success: function (result) {
-                        if (result === 'null') {
-                            console.log('nothing to show');
-                            $('#description').val('');
-                        } else {
-                            $('#description').val(result.description);
-                        }
+                        console.log(result);
+                        $('#description').val(result);
+                    },
+                    error: function (result) {
+                        console.log(result);
                     }
                 });
             });
@@ -39,7 +35,7 @@
     </script>
 </head>
 <body class="center">
-<h1>User Regulation Management</h1>
+<h1><a href="index.jsp"><i class="fa fa-sign-out" aria-hidden="true"></i></a> User Regulation Management</h1>
 <h3>Your Regulations</h3>
 <table>
     <thead>

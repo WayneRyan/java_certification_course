@@ -18,10 +18,10 @@ public class DepartmentEntity implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "department")
-    private transient Set<UserEntity> users;
+    private Set<UserEntity> users;
 
     @OneToMany(mappedBy = "department")
-    private transient Set<RegulationEntity> regulations;
+    private Set<RegulationEntity> regulations;
 
     public int getId() {
         return id;

@@ -30,7 +30,7 @@ public class UserEntity implements Serializable {
     private DepartmentEntity department;
 
     @OneToMany(mappedBy = "user")
-    private transient Set<CommentEntity> comments;
+    private Set<CommentEntity> comments;
 
     public int getId() {
         return id;

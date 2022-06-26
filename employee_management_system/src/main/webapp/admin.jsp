@@ -11,11 +11,12 @@
 <%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <script src="https://kit.fontawesome.com/4164eda486.js" crossorigin="anonymous"></script>
     <title>Admin Regulation Management</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body class="center">
-<h1>Admin Regulation Management</h1>
+<h1><a href="index.jsp"><i class="fa fa-sign-out" aria-hidden="true"></i></a> Admin Regulation Management</h1>
 <h3>Existing Regulations</h3>
 <table>
     <thead>

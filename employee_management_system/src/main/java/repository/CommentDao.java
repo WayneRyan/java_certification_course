@@ -14,7 +14,7 @@ public class CommentDao {
             EntityManager em = DbResource.getEntityManager();
             EntityTransaction et = em.getTransaction();
             et.begin();
-            em.persist(comment);
+            em.merge(comment);
             et.commit();
             return true;
         } catch (Exception e) {

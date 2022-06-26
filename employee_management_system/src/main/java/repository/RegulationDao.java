@@ -41,7 +41,6 @@ public class RegulationDao {
             tq.setParameter("deptID", user.getDepartment());
             return tq.getResultList();
         } catch (Exception e) {
-            System.out.println(e);
             return null;
         }
     }

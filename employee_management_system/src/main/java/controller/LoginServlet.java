@@ -1,6 +1,9 @@
 package controller;
 
+import entity.CommentEntity;
+import entity.RegulationEntity;
 import entity.UserEntity;
+import repository.CommentDao;
 import repository.DepartmentDao;
 import repository.RegulationDao;
 import service.Authentication;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -51,7 +55,16 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("allRegulations", RegulationDao.getAllRegulations());
             request.getRequestDispatcher("admin.jsp").forward(request, response);
         } else {
-            request.setAttribute("userRegulations", RegulationDao.getUsersRegulations(user));
+            List<RegulationEntity> userRegulations = RegulationDao.getUsersRegulations(user);
+            String initialComment = "";
+            if (userRegulations.size() > 0) {
+                CommentEntity theComment =  CommentDao.getComment(userRegulations.get(0).getId(), user);
+                if (theComment != null){
+                    initialComment = theComment.getDescription();
+                }
+            }
+            request.setAttribute("initialComment", initialComment);
+            request.setAttribute("userRegulations", userRegulations);
             request.getRequestDispatcher("user.jsp").forward(request, response);
         }
     }
